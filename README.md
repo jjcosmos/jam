@@ -1,4 +1,4 @@
-# Jamlang
+# Jam lang
 
 A C-like experimental language and toolchain built with Rust and WASM.
 
