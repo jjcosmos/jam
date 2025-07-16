@@ -1,0 +1,26 @@
+extern proc memcpy(dest: void*, src: void*, n: u64) -> void*;
+extern proc memmove(dest: void*, src: void*, n: u64) -> void*;
+extern proc memset(s: void*, c: i32, n: u64) -> void*;
+extern proc memcmp(s1: void*, s2: void*, n: u64) -> i32;
+extern proc memchr(s: void*, c: i32, n: u64) -> void*;
+
+extern proc strlen(s: cstr) -> u64;
+extern proc strcmp(s1: cstr, s2: cstr) -> i32;
+extern proc strncmp(s1: cstr, s2: cstr, n: u64) -> i32;
+extern proc strcpy(dest: i8*, src: cstr) -> i8*;
+extern proc strncpy(dest: i8*, src: cstr, n: u64) -> i8*;
+extern proc strcat(dest: i8*, src: cstr) -> i8*;
+extern proc strncat(dest: i8*, src: cstr, n: u64) -> i8*;
+extern proc strchr(s: cstr, c: i32) -> i8*;
+extern proc strrchr(s: cstr, c: i32) -> i8*;
+extern proc strstr(haystack: cstr, needle: cstr) -> i8*;
+extern proc strcmpi(s1: cstr, s2: cstr) -> i32; // non-standard but common
+extern proc strdup(s: cstr) -> i8*;             // POSIX, but very commonly used
+
+extern proc strcoll(s1: cstr, s2: cstr) -> i32;
+extern proc strcspn(s1: cstr, s2: cstr) -> u64;
+extern proc strerror(errnum: i32) -> cstr;
+extern proc strpbrk(s1: cstr, accept: cstr) -> i8*;
+extern proc strspn(s1: cstr, accept: cstr) -> u64;
+extern proc strtok(s: i8*, delimiters: cstr) -> i8*;
+extern proc strxfrm(dest: i8*, src: cstr, n: u64) -> u64;

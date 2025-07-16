@@ -1,0 +1,14 @@
+extern proc isalnum(c: i32) -> i32;
+extern proc isalpha(c: i32) -> i32;
+extern proc isblank(c: i32) -> i32;
+extern proc iscntrl(c: i32) -> i32;
+extern proc isdigit(c: i32) -> i32;
+extern proc isgraph(c: i32) -> i32;
+extern proc islower(c: i32) -> i32;
+extern proc isprint(c: i32) -> i32;
+extern proc ispunct(c: i32) -> i32;
+extern proc isspace(c: i32) -> i32;
+extern proc isupper(c: i32) -> i32;
+extern proc isxdigit(c: i32) -> i32;
+extern proc tolower(c: i32) -> i32;
+extern proc toupper(c: i32) -> i32;

@@ -1,0 +1,25 @@
+{
+  "name": "jamlang",
+  "displayName": "JamLang",
+  "description": "jamlang programming language",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "jam",
+      "aliases": ["jamlang", "jam"],
+      "extensions": [".jam"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "jam",
+      "scopeName": "source.jam",
+      "path": "./syntaxes/jam.tmLanguage.json"
+    }]
+  }
+}

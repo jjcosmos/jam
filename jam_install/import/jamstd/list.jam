@@ -1,0 +1,168 @@
+@include "clib/string.jam";
+@include "clib/stdlib.jam";
+@include "clib/stdio.jam";
+
+
+struct List<T> {
+    base_element: T*,
+    element_count: u64,
+    capacity: u64,
+}
+
+impl <T> List::<T> {
+    /// Create a list given an element size and initial capacity
+    proc create(capacity: u64) -> List::<T> {
+        let clamped_cap = capacity;
+        if (clamped_cap < 1u64) {
+            clamped_cap = 1u64;
+        }
+
+        let list = List::<T> {
+            base_element: malloc(sizeof::<T>() * clamped_cap),
+            element_count: 0u64,
+            capacity: clamped_cap,
+        };
+
+        printf("created list %p with capacity: %llu \n", list.base_element, list.capacity);
+
+        return list;
+    }
+
+    /// Push an element to the end of the self. 'element' should point to the value that is pushed.
+    proc push(self: List::<T>*, element: T) -> void {
+        //printf("list: %p sizeof: %llu | capacity: %llu \n", self.base_element, sizeof::<T>(), self.capacity);
+        if (self.element_count >= self.capacity) {
+            // Double the space
+            let new_size = sizeof::<T>() * (self.capacity * 2u64);
+            //printf("reallocating list. new size is %u \n", new_size);
+            self.base_element = realloc(self.base_element, new_size);
+            self.capacity = self.capacity * 2u64;
+        }
+
+        self.element_count += 1u64;
+
+        //printf("pushing element. New count is %u \n", self.element_count);
+        //self.set(self.element_count - 1u64, element);
+        printf("assign element, base element is %p \n", self.base_element);
+        self.base_element[self.element_count - 1u64] = element;
+        printf("end push, base element is %p \n", self.base_element);
+    }
+
+    /// Pops the last element off the list, returning bsuccess
+    proc pop(self: List::<T>*, outptr: T*) -> bool {
+        if (self.element_count < 1u64) {
+            return false;
+        }
+
+        if (outptr == null) {
+            printf("out ptr is null \n");
+        }
+
+        printf("pop: base = %p, count = %d\n", self.base_element, self.element_count);
+
+        let val = self.get(self.element_count - 1u64);
+
+        printf("popped value is %d \n", val);
+
+        self.element_count -= 1u64;
+
+        *outptr = val;
+
+        return true;
+    }
+
+    /// Removes a value at a given index, shifting the rest of the list in memory. Returns false if index was invalid
+    proc remove_at(self: List::<T>*, index: u64) -> bool {
+        if (index >= self.element_count) {
+            printf("index %d is oob of list (len %d) \n", index, self.element_count);
+            return false;
+        }
+
+        let end = self.element_count - 1u64;
+        for(let shift = index; shift < end; shift += 1u64;) {
+            self.base_element[shift] = self.base_element[shift + 1u64];
+        }
+
+        self.element_count -= 1u64;
+        return true;
+    }
+
+    /// Inserts a value at the index given, maintaining the remaining order
+    proc insert_at(self: List::<T>*, index: u64, value: T) -> bool {
+        if (index >= self.element_count) {
+            printf("index %d is oob of list (len %d) \n", index, self.element_count);
+            return false;
+        }
+        // Push the last one on to the end, both to increment ele count, and realloc if needed
+        // This value will be overwritten
+        self.push(value);
+
+        // Right shift all the elements of (inclusive) index and upward
+        let rev_idx = self.element_count - 1u64;
+        while (rev_idx > index) {
+            self.base_element[rev_idx] = self.base_element[rev_idx - 1u64];
+            rev_idx -= 1u64;
+        }
+
+        // Then set at the index
+        self.set(index, value);
+
+        return true;
+    }
+
+    /// A faster insert at the cost of ordering. Inserts at the end, and swaps with the element at the desired index
+    proc insert_at_swap(self: List::<T>*, index: u64, value: T) -> bool {
+        if (index >= self.element_count) {
+            printf("index %d is oob of list (len %d) \n", index, self.element_count);
+            return false;
+        }
+
+        let temp_old_at = self.get(index);
+
+        // Push the last one on to the end, both to increment ele count, and realloc if needed
+        self.push(value);
+
+        self.base_element[index] = value;
+        self.base_element[self.element_count - 1u64] = temp_old_at;
+
+
+        return true;
+    }
+
+    /// Set the value of the list at an index. Returns false if out of bounds.
+    proc set(self: List::<T>*, index: u64, value: T) -> bool {
+        // if (index >= self.element_count) {
+        //     printf("index %d is oob of list (len %d) \n", index, self.element_count);
+        //     return false;
+        // }
+
+        self.base_element[index] = value;
+        return true;
+    }
+
+    /// Get a value from the self.
+    proc get(self: List::<T>*, index: u64) -> T {
+        // if (index >= self.element_count) {
+        //     printf("access oob of list \n");
+        //     let out: T;
+        //     return out;
+        // }
+
+        // if (self.base_element == null) {
+        //     printf("base element is null");
+        // }
+
+        // printf("List ptr: %p \n", self);
+        // printf("Base: %p \n", self.base_element);
+
+        return self.base_element[index];
+    }
+
+    /// Free the memory used by the list
+    proc free(self: List::<T>*) -> void {
+        free(self.base_element);
+        self.base_element = null;
+        self.element_count = 0u64;
+        self.capacity = 0u64;
+    }
+}

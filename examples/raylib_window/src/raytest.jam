@@ -1,0 +1,41 @@
+extern proc InitWindow(i32, i32, cstr) -> void;
+extern proc SetTargetFPS(i32) -> void;
+extern proc WindowShouldClose() -> bool;
+extern proc BeginDrawing() -> void;
+extern proc ClearBackground(Color) -> void;
+extern proc DrawText(cstr, i32, i32, i32, Color) -> void;
+extern proc EndDrawing() -> void;
+extern proc CloseWindow() -> void;
+extern proc GetColor(u32) -> Color;
+extern proc ColorToInt(color: Color) -> u32;
+
+extern struct Color {
+    r: u8;
+    g: u8;
+    b: u8;
+    a: u8;
+}
+
+proc main() -> i32 {
+    let screen_w: i32 = 800i32;
+    let screen_h: i32 = 450i32;
+
+    InitWindow(screen_w, screen_h, "hello window");
+    SetTargetFPS(60i32);
+
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+
+        let bg_color: Color = Color {r: 100u8, g: 0u8, b: 0u8, a: 0u8};
+
+        ClearBackground(bg_color);
+
+        let text_color: Color = Color {r: 100u8, g: 155u8, b: 155u8, a: 255u8};
+        DrawText("Hello World!", 200i32, 200i32, 20i32, text_color);
+        EndDrawing();
+    }
+
+    CloseWindow();
+
+    return 0i32;
+}

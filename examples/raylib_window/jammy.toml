@@ -1,0 +1,5 @@
+package_name = "raylib_window"
+lib_dir = "lib"
+include_dir = "include"
+linker_args = ["-lraylib", "-lkernel32", "-luser32", "-lgdi32", "-lshell32", "-lwinmm", "-lvcruntime", "-lmsvcrt", "-llegacy_stdio_definitions"]
+target_triple = "x86_64-pc-windows-msvc"

@@ -1,0 +1,15 @@
+sum Option<?T?> {
+    None,
+    Some(T),
+}
+
+struct Slice<?T?> {
+    ptr: T*,
+    len: usize,
+}
+
+impl <?T?> Slice<?T?> {
+    proc len(self: Slice<?T?>*) -> usize {
+        self.len
+    }
+}

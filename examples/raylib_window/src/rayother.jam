@@ -1,0 +1,3 @@
+proc print_a_bit() -> void {
+    printf("hallo from other file\n");
+}

@@ -1,0 +1,4 @@
+package_name = "hello_jamlang"
+lib_dir = "lib"
+include_dir = "include"
+linker_args = ["-lvcruntime", "-lmsvcrt", "-llegacy_stdio_definitions", "-Wl,/subsystem:console"]

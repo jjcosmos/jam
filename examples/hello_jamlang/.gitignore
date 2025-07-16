@@ -1,0 +1,6 @@
+*.exe
+*.ll
+*.obj
+/out
+/temp
+/src/bindgen

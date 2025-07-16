@@ -1,0 +1,30 @@
+extern proc malloc(size: u64) -> void*;
+extern proc calloc(nitems: u64, size: u64) -> void*;
+extern proc realloc(ptr: void*, size: u64) -> void*;
+extern proc free(ptr: void*) -> void;
+
+extern proc abs(x: i32) -> i32;
+extern proc labs(x: i64) -> i64;
+extern proc llabs(x: i64) -> i64;
+
+extern proc atof(s: cstr) -> f64;
+extern proc atoi(s: cstr) -> i32;
+extern proc atol(s: cstr) -> i64;
+extern proc atoll(s: cstr) -> i64;
+
+extern proc strtod(s: cstr, endptr: i8**) -> f64;
+extern proc strtof(s: cstr, endptr: i8**) -> f32;
+extern proc strtold(s: cstr, endptr: i8**) -> f64; // long double → still f64 for now
+extern proc strtol(s: cstr, endptr: i8**, base: i32) -> i64;
+extern proc strtoll(s: cstr, endptr: i8**, base: i32) -> i64;
+extern proc strtoul(s: cstr, endptr: i8**, base: i32) -> u64;
+extern proc strtoull(s: cstr, endptr: i8**, base: i32) -> u64;
+
+extern proc rand() -> i32;
+extern proc srand(seed: u32) -> void;
+
+extern proc qsort(base: void*, nitems: u64, size: u64, cmp: void*) -> void;
+extern proc bsearch(key: void*, base: void*, nitems: u64, size: u64, cmp: void*) -> void*;
+
+extern proc getenv(name: cstr) -> cstr;
+extern proc system(command: cstr) -> i32;

@@ -1,0 +1,43 @@
+extern proc printf(format: cstr, ...) -> i32;
+extern proc fprintf(stream: FILE*, format: cstr, ...) -> i32;
+extern proc sprintf(s: i8*, format: cstr, ...) -> i32;
+extern proc snprintf(s: i8*, n: u64, format: cstr, ...) -> i32;
+
+extern proc scanf(format: cstr, ...) -> i32;
+extern proc fscanf(stream: FILE*, format: cstr, ...) -> i32;
+extern proc sscanf(s: cstr, format: cstr, ...) -> i32;
+
+extern proc fopen(filename: cstr, mode: cstr) -> FILE*;
+extern proc freopen(filename: cstr, mode: cstr, stream: FILE*) -> FILE*;
+extern proc fclose(stream: FILE*) -> i32;
+
+extern proc fread(ptr: void*, size: u64, nmemb: u64, stream: FILE*) -> u64;
+extern proc fwrite(ptr: void*, size: u64, nmemb: u64, stream: FILE*) -> u64;
+
+extern proc fgetc(stream: FILE*) -> i32;
+extern proc fputc(c: i32, stream: FILE*) -> i32;
+extern proc fgets(s: i8*, n: i32, stream: FILE*) -> i8*;
+extern proc fputs(s: cstr, stream: FILE*) -> i32;
+
+extern proc getc(stream: FILE*) -> i32;
+extern proc getchar() -> i32;
+extern proc putc(c: i32, stream: FILE*) -> i32;
+extern proc putchar(c: i32) -> i32;
+extern proc puts(s: cstr) -> i32;
+
+extern proc feof(stream: FILE*) -> i32;
+extern proc ferror(stream: FILE*) -> i32;
+extern proc clearerr(stream: FILE*) -> void;
+
+extern proc fflush(stream: FILE*) -> i32;
+
+extern proc fseek(stream: FILE*, offset: i64, whence: i32) -> i32;
+extern proc ftell(stream: FILE*) -> i64;
+extern proc rewind(stream: FILE*) -> void;
+
+extern proc remove(filename: cstr) -> i32;
+extern proc rename(oldname: cstr, newname: cstr) -> i32;
+
+extern struct FILE {
+    _dummy: i32,
+}
