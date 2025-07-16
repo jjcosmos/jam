@@ -24,11 +24,9 @@ A C-like experimental language and toolchain built with Rust and WASM.
 
 git clone https://github.com/jjcosmos/jamlang_all.git
 
+```
 cargo run -p xtask -- --release
 ```
-
-> Note: `jamc` uses `llvm-sys` and will fail to compile if LLVM isn't properly detected.
-
 For convenience, add the compiled binaries to your system `PATH`.
 
 ---
