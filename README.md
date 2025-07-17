@@ -62,6 +62,8 @@ proc main() -> i32 {
 }
 ```
 
+Check out [this demo project](https://github.com/jjcosmos/jam-sandbox) for a rendering implementation I am testing while developing the runtime
+
 THIS IS OUT OF DATE AND NEEDS RE-DONE (post LLVM removal)
 Browse additional examples in the [`examples/`](https://github.com/jjcosmos/jamlang_all/tree/main/examples) directory (WIP).
 
