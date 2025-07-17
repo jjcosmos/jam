@@ -22,7 +22,7 @@ A C-like experimental language and toolchain built with Rust and WASM.
 
 ### Building `jamc` and `jammy`
 
-git clone https://github.com/jjcosmos/jamlang_all.git
+git clone https://github.com/jjcosmos/jam.git
 
 ```
 cargo run -p xtask -- --release
